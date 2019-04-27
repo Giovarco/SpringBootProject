@@ -1,5 +1,6 @@
 package net.mignemi.portfolio.model;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -13,6 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table
 @Data
+@Builder
 public class Design {
 
     @Id
