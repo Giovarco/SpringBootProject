@@ -1,5 +1,6 @@
 package net.mignemi.portfolio.controller;
 
+import net.mignemi.portfolio.mapper.ParametersToDesignMapper;
 import net.mignemi.portfolio.model.Design;
 import net.mignemi.portfolio.repository.DesignRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,16 +23,8 @@ public class DesignController {
     public void saveDesign(
             @RequestParam(value = "title") String title,
             @RequestParam(value = "file") MultipartFile file) {
-        Design design = null;
-        try {
-            design = Design.builder()
-                    .title(title)
-                    .image(file.getBytes())
-                    .build();
-            designRepository.save(design);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Design design = ParametersToDesignMapper.map(title, file);
+        designRepository.save(design);
     }
 
 }
