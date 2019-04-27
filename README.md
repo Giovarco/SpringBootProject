@@ -3,6 +3,8 @@ Code related TODOs:
     - Add more constrains like "nullable = false" and the like
 - DTO
     - Add validation
+- Error handling
+    - Handle elegantly errors using an ErrorHandling class
 
 Features' TODOs:
     - Each design can have 0 or more tags
