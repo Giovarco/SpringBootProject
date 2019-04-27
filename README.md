@@ -5,5 +5,6 @@ Code related TODOs:
     - Add validation
 
 Features' TODOs:
-    - Add image tags
-    - Allow GET by filters
+    - Each design can have 0 or more tags
+    - Each design has a description
+    - Allow GET designs by filters
