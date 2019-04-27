@@ -26,13 +26,17 @@ public class DesignService {
 
     public void updateDesign(Long id, String title, MultipartFile file) {
         try {
-            Design designInDb = designRepository.getOne(id);
-            designInDb.setTitle(title);
-            designInDb.setImage(file.getBytes());
-            designRepository.save(designInDb);
+            getAndUpdateDesign(id, title, file);
         } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException(e.getMessage(), e.getCause());
         }
+    }
+
+    public void getAndUpdateDesign(Long id, String title, MultipartFile file) throws IOException {
+        Design designInDb = designRepository.getOne(id);
+        designInDb.setTitle(title);
+        designInDb.setImage(file.getBytes());
+        designRepository.save(designInDb);
     }
 }
