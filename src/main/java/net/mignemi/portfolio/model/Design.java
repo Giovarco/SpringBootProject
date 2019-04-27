@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tbl_book")
 @Data
-public class Book {
+public class Design {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
