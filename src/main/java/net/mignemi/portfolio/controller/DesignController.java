@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping(value = "/design")
 public class DesignController {
@@ -20,10 +22,16 @@ public class DesignController {
     public void saveDesign(
             @RequestParam(value = "title") String title,
             @RequestParam(value = "file") MultipartFile file) {
-        Design design = Design.builder()
-                .title(title)
-                .build();
-        designRepository.save(design);
+        Design design = null;
+        try {
+            design = Design.builder()
+                    .title(title)
+                    .image(file.getBytes())
+                    .build();
+            designRepository.save(design);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
