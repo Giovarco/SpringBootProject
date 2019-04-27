@@ -11,7 +11,7 @@ import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tbl_book")
+@Table
 @Data
 public class Design {
 
