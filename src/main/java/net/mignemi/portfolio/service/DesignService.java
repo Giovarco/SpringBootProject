@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -21,5 +22,21 @@ public class DesignService {
 
     public List<Design> getDesigns() {
         return designRepository.findAll();
+    }
+
+    public void updateDesign(Long id, String title, MultipartFile file) {
+        try {
+            getAndUpdateDesign(id, title, file);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e.getMessage(), e.getCause());
+        }
+    }
+
+    public void getAndUpdateDesign(Long id, String title, MultipartFile file) throws IOException {
+        Design designInDb = designRepository.getOne(id);
+        designInDb.setTitle(title);
+        designInDb.setImage(file.getBytes());
+        designRepository.save(designInDb);
     }
 }
