@@ -1,4 +1,4 @@
-package net.mignemi.portfolio;
+package net.mignemi.portfolio.featureTests;
 
 import net.mignemi.portfolio.model.Design;
 import net.mignemi.portfolio.repository.DesignRepository;
