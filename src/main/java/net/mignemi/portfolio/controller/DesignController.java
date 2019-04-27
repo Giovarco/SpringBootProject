@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class DesignController {
 
     @PostMapping
-    public String greeting() {
-        return "test";
+    public void saveDesign() {
+        System.out.println("HELLO");
     }
 
 }
