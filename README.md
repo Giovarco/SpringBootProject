@@ -1,12 +1,14 @@
-Code related TODOs:
+# Non-exaustive TODO lists
+## Code related
 - Model
-    - Add more constrains like "nullable = false" and the like
+    - Add more constrains like "nullable = false"
 - DTO
     - Add validation
 - Error handling
-    - Handle elegantly errors using an ErrorHandling class
+    - Implement an ErrorHandler class
+        - Implement custom Exceptions
 
-Features' TODOs:
-    - Each design can have 0 or more tags
-    - Each design has a description
-    - Allow GET designs by filters
+## Features
+- Each design can have 0 or more tags
+- Each design has a description
+- Design results can be filtered
