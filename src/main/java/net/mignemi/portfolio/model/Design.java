@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 
-// TODO: Add more constrains like "nullable = false" and the like
 @Entity
 @Table
 @Data
