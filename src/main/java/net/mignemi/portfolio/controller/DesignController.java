@@ -3,6 +3,7 @@ package net.mignemi.portfolio.controller;
 import net.mignemi.portfolio.mapper.ParametersToDesignMapper;
 import net.mignemi.portfolio.model.Design;
 import net.mignemi.portfolio.repository.DesignRepository;
+import net.mignemi.portfolio.service.DesignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,16 +19,14 @@ import java.io.IOException;
 @RequestMapping(value = "/design")
 public class DesignController {
 
-    @Autowired
-    DesignRepository designRepository;
+    @Autowired DesignService designService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void saveDesign(
             @RequestParam(value = "title") String title,
             @RequestParam(value = "file") MultipartFile file) {
-        Design design = ParametersToDesignMapper.map(title, file);
-        designRepository.save(design);
+        designService.saveDesign(title, file);
     }
 
 }
