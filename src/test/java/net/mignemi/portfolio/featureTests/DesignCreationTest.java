@@ -1,4 +1,4 @@
-package net.mignemi.portfolio;
+package net.mignemi.portfolio.featureTests;
 
 import net.mignemi.portfolio.model.Design;
 import net.mignemi.portfolio.repository.DesignRepository;
@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,6 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
+@Transactional
 public class DesignCreationTest {
 
     private static final String TITLE = "title";
@@ -47,6 +49,7 @@ public class DesignCreationTest {
 
     @Test
     public void test() throws Exception {
+        // Call end-point
         mvc.perform(
                 multipart("/design")
                         .file(image)
@@ -54,15 +57,12 @@ public class DesignCreationTest {
                         .param(TITLE, TITLE)
         )
                 .andExpect(status().isCreated());
-    }
 
-    @After
-    public void asserts() {
-        // Assert existance
+        // Assert entity existance
         List<Design> designs = designRepository.findAll();
         assertEquals(1, designs.size());
 
-        // Assert content
+        // Assert entity content
         Design design = designs.get(0);
         assertEquals(TITLE, design.getTitle());
         assertNotNull(design.getImage());

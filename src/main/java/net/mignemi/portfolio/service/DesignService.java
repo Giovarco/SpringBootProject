@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @Service
 public class DesignService {
 
@@ -15,5 +17,9 @@ public class DesignService {
     public void saveDesign(String title, MultipartFile file) {
         Design design = ParametersToDesignMapper.map(title, file);
         designRepository.save(design);
+    }
+
+    public List<Design> getDesigns() {
+        return designRepository.findAll();
     }
 }
