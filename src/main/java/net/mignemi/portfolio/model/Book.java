@@ -14,14 +14,12 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    private Double price;
 
     public Book() {
     }
 
-    public Book(String title, Double price) {
+    public Book(String title) {
         this.title = title;
-        this.price = price;
     }
 
     public Long getId() {
@@ -38,14 +36,6 @@ public class Book {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
     }
 
     @Override
