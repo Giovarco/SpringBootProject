@@ -13,14 +13,14 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    private String title;
     private Double price;
 
     public Book() {
     }
 
-    public Book(String name, Double price) {
-        this.name = name;
+    public Book(String title, Double price) {
+        this.title = title;
         this.price = price;
     }
 
@@ -32,12 +32,12 @@ public class Book {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Double getPrice() {
@@ -52,7 +52,7 @@ public class Book {
     public String toString() {
         return "Book{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", name='" + title + '\'' +
                 ", price=" + price +
                 '}';
     }
