@@ -2,9 +2,7 @@ package net.mignemi.portfolio.featureTests.TagApi;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import net.mignemi.portfolio.model.Design;
 import net.mignemi.portfolio.model.Tag;
-import net.mignemi.portfolio.repository.DesignRepository;
 import net.mignemi.portfolio.repository.TagRepository;
 import net.mignemi.portfolio.utils.RepositoryUtils;
 import org.junit.Before;
@@ -17,11 +15,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 

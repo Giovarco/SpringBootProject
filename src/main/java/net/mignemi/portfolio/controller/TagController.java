@@ -1,6 +1,5 @@
 package net.mignemi.portfolio.controller;
 
-import net.mignemi.portfolio.model.Design;
 import net.mignemi.portfolio.model.Tag;
 import net.mignemi.portfolio.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
