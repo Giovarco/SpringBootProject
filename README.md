@@ -3,7 +3,9 @@
 - Model
     - Add more constrains like "nullable = false"
 - DTO
-    - Add validation
+    - Could we use entities instead of DTO?
+- Validation
+    - Use Validations and custom validation annotation
 - Error handling
     - Implement an ErrorHandler class
         - Implement custom Exceptions
