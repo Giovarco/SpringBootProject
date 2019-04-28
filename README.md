@@ -9,6 +9,8 @@
 - Error handling
     - Implement an ErrorHandler class
         - Implement custom Exceptions
+- Optimization
+    - Limit the amount of result sent to the front-end
 
 ## Features
 - Each design can have 0 or more tags
