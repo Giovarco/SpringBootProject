@@ -4,6 +4,7 @@ import net.mignemi.portfolio.model.Design;
 import net.mignemi.portfolio.model.Tag;
 import net.mignemi.portfolio.repository.TagRepository;
 import net.mignemi.portfolio.service.DesignService;
+import net.mignemi.portfolio.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,12 +25,12 @@ import java.util.List;
 public class TagController {
 
     @Autowired
-    TagRepository tagRepository;
+    TagService tagService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void saveTag(@RequestBody Tag tag) {
-        tagRepository.save(tag);
+        tagService.saveTag(tag);
     }
 
 }
