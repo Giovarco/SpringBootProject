@@ -11,6 +11,9 @@
         - Implement custom Exceptions
 - Optimization
     - Limit the amount of result sent to the front-end
+- Best practises
+    - POSTs should return the created entity
+    - UPDATEs should return the updated entity
 
 ## Features
 - Each design can have 0 or more tags
