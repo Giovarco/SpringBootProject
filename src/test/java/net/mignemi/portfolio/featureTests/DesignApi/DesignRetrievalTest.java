@@ -1,4 +1,4 @@
-package net.mignemi.portfolio.featureTests;
+package net.mignemi.portfolio.featureTests.DesignApi;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
