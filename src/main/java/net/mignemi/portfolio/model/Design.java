@@ -28,6 +28,6 @@ public class Design {
     private String title;
 
     @Lob
-    @Column(columnDefinition="BLOB")
+    @Column(columnDefinition = "BLOB")
     private byte[] image;
 }

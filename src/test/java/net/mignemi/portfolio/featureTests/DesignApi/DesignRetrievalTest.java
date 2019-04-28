@@ -59,7 +59,8 @@ public class DesignRetrievalTest {
                 .getContentAsString();
 
         // Process response
-        List<Design> designs = objectMapper.readValue(responseBody, new TypeReference<List<Design>>() { });
+        List<Design> designs = objectMapper.readValue(responseBody, new TypeReference<List<Design>>() {
+        });
 
         // Assert entity existance
         assertEquals(1, designs.size());
