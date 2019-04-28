@@ -1,8 +1,7 @@
-package net.mignemi.portfolio.featureTests;
+package net.mignemi.portfolio.featureTests.DesignApi;
 
 import net.mignemi.portfolio.model.Design;
 import net.mignemi.portfolio.repository.DesignRepository;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

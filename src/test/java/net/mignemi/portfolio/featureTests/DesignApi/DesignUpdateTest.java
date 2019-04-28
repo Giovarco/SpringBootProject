@@ -1,7 +1,8 @@
-package net.mignemi.portfolio.featureTests;
+package net.mignemi.portfolio.featureTests.DesignApi;
 
 import net.mignemi.portfolio.model.Design;
 import net.mignemi.portfolio.repository.DesignRepository;
+import net.mignemi.portfolio.utils.RepositoryUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,6 +47,9 @@ public class DesignUpdateTest {
 
     @Autowired
     private DesignRepository designRepository;
+
+    @Autowired
+    private RepositoryUtils repositoryUtils;
 
     @Before
     public void setup() throws IOException {
@@ -113,8 +117,9 @@ public class DesignUpdateTest {
      * to "POST". This is a workaround to use also for "PUT".
      */
     private MockMultipartHttpServletRequestBuilder getMockMultipartHttpPutServletRequestBuilder() {
+        String urlTemplate = String.format("/design/%s", repositoryUtils.findUniqueDesign().getId());
         MockMultipartHttpServletRequestBuilder builder =
-                MockMvcRequestBuilders.fileUpload("/design/1");
+                MockMvcRequestBuilders.fileUpload(urlTemplate);
         builder.with(request -> {
             request.setMethod("PUT");
             return request;
