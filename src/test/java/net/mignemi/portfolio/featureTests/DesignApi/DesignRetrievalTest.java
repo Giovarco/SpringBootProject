@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import net.mignemi.portfolio.model.Design;
 import net.mignemi.portfolio.repository.DesignRepository;
+import net.mignemi.portfolio.utils.RepositoryUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,14 +40,18 @@ public class DesignRetrievalTest {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private RepositoryUtils repositoryUtils;
+
     @Before
     public void setup() {
         byte[] byteArray = {1};
-        savedDesign = Design.builder()
+        Design designToSave = Design.builder()
                 .title("title")
                 .image(byteArray)
                 .build();
-        designRepository.save(savedDesign);
+        designRepository.save(designToSave);
+        savedDesign = repositoryUtils.findUniqueDesign();
     }
 
     @Test

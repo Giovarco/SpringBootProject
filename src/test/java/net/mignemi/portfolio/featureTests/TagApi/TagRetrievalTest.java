@@ -6,6 +6,7 @@ import net.mignemi.portfolio.model.Design;
 import net.mignemi.portfolio.model.Tag;
 import net.mignemi.portfolio.repository.DesignRepository;
 import net.mignemi.portfolio.repository.TagRepository;
+import net.mignemi.portfolio.utils.RepositoryUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -43,12 +44,16 @@ public class TagRetrievalTest {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private RepositoryUtils repositoryUtils;
+
     @Before
     public void setup() {
-        Tag tag = Tag.builder()
+        Tag tagToSave = Tag.builder()
                 .title(TITLE)
                 .build();
-        savedTag = tagRepository.save(tag);
+        tagRepository.save(tagToSave);
+        savedTag = repositoryUtils.findUniqueTag();
     }
 
     @Test
