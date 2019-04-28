@@ -4,6 +4,7 @@
     - Add more constrains like "nullable = false"
 - DTO
     - Could we use entities instead of DTO?
+        - If we use DTOs, we must change test classes accordingly
 - Validation
     - Use Validations and custom validation annotation
 - Error handling
