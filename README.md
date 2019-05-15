@@ -15,6 +15,7 @@
 - Best practises
     - POSTs should return the created entity
     - UPDATEs should return the updated entity
+    - The update end-point should avoid mapping if possible
 
 ## Features
 - Each design can have 0 or more tags
