@@ -1,9 +1,9 @@
-package net.mignemi.portfolio.featureTests.DesignApi;
+package net.mignemi.portfolio.featureTests.TagApi;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import net.mignemi.portfolio.model.Design;
-import net.mignemi.portfolio.repository.DesignRepository;
+import net.mignemi.portfolio.model.Tag;
+import net.mignemi.portfolio.repository.TagRepository;
 import net.mignemi.portfolio.utils.RepositoryUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,11 +15,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -27,15 +25,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
-public class DesignRetrievalTest {
+public class TagRetrievalTest {
 
-    private Design savedDesign;
+    private static final String TITLE = "tagTitle";
+
+    private Tag savedTag;
 
     @Autowired
     private MockMvc mvc;
 
     @Autowired
-    private DesignRepository designRepository;
+    private TagRepository tagRepository;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -45,34 +45,31 @@ public class DesignRetrievalTest {
 
     @Before
     public void setup() {
-        byte[] byteArray = {1};
-        Design designToSave = Design.builder()
-                .title("title")
-                .image(byteArray)
+        Tag tagToSave = Tag.builder()
+                .title(TITLE)
                 .build();
-        designRepository.save(designToSave);
-        savedDesign = repositoryUtils.findUniqueDesign();
+        tagRepository.save(tagToSave);
+        savedTag = repositoryUtils.findUniqueTag();
     }
 
     @Test
     public void test() throws Exception {
         // Call end-point
-        String responseBody = mvc.perform(get("/design"))
+        String responseBody = mvc.perform(get("/tag"))
                 .andExpect(status().isOk())
                 .andReturn()
                 .getResponse()
                 .getContentAsString();
 
         // Process response
-        List<Design> designs = objectMapper.readValue(responseBody, new TypeReference<List<Design>>() {
+        List<Tag> responseTags = objectMapper.readValue(responseBody, new TypeReference<List<Tag>>() {
         });
 
-        // Assert entity existance
-        assertEquals(1, designs.size());
+        // Assert response tag existance
+        assertEquals(1, responseTags.size());
 
-        // Assert entity content
-        Design retrievedDesign = designs.get(0);
-        assertEquals(savedDesign.getTitle(), retrievedDesign.getTitle());
-        assertTrue(Arrays.equals(savedDesign.getImage(), retrievedDesign.getImage()));
+        // Assert response tag content
+        Tag responseTag = responseTags.get(0);
+        assertEquals(savedTag.getTitle(), responseTag.getTitle());
     }
 }

@@ -13,7 +13,8 @@ import java.util.List;
 @Service
 public class DesignService {
 
-    @Autowired DesignRepository designRepository;
+    @Autowired
+    DesignRepository designRepository;
 
     public void saveDesign(String title, MultipartFile file) {
         Design design = ParametersToDesignMapper.map(title, file);

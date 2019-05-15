@@ -51,6 +51,22 @@ public class DesignUpdateTest {
     @Autowired
     private RepositoryUtils repositoryUtils;
 
+    private static byte[] toByteArray(InputStream in) throws IOException {
+
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+
+        byte[] buffer = new byte[1024];
+        int len;
+
+        // read bytes from the input stream and store them in buffer
+        while ((len = in.read(buffer)) != -1) {
+            // write bytes from the buffer into output stream
+            os.write(buffer, 0, len);
+        }
+
+        return os.toByteArray();
+    }
+
     @Before
     public void setup() throws IOException {
         saveDesignToUpdate();
@@ -77,22 +93,6 @@ public class DesignUpdateTest {
         Design design = designs.get(0);
         assertEquals(TITLE_AFTER, design.getTitle());
         assertTrue(Arrays.equals(newImage.getBytes(), design.getImage()));
-    }
-
-    private static byte[] toByteArray(InputStream in) throws IOException {
-
-        ByteArrayOutputStream os = new ByteArrayOutputStream();
-
-        byte[] buffer = new byte[1024];
-        int len;
-
-        // read bytes from the input stream and store them in buffer
-        while ((len = in.read(buffer)) != -1) {
-            // write bytes from the buffer into output stream
-            os.write(buffer, 0, len);
-        }
-
-        return os.toByteArray();
     }
 
     private void instantiateNewImage() throws IOException {

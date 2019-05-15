@@ -4,11 +4,17 @@
     - Add more constrains like "nullable = false"
 - DTO
     - Could we use entities instead of DTO?
+        - If we use DTOs, we must change test classes accordingly
 - Validation
     - Use Validations and custom validation annotation
 - Error handling
     - Implement an ErrorHandler class
         - Implement custom Exceptions
+- Optimization
+    - Limit the amount of result sent to the front-end
+- Best practises
+    - POSTs should return the created entity
+    - UPDATEs should return the updated entity
 
 ## Features
 - Each design can have 0 or more tags
