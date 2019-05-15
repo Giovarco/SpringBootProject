@@ -27,5 +27,7 @@ public class TagController {
     }
 
     @PutMapping("/{id}")
-    public void putDesign(@PathVariable("id") Long id, @RequestBody Tag tag) { tagService.updateTag(id, tag); }
+    public void putDesign(@PathVariable("id") Long id, @RequestBody Tag tag) {
+        tagService.updateTag(id, tag);
+    }
 }
