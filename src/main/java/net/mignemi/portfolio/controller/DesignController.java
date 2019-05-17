@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/design")
@@ -20,8 +21,9 @@ public class DesignController {
     @ResponseStatus(HttpStatus.CREATED)
     public void saveDesign(
             @RequestParam(value = "title") String title,
+            @RequestParam(value = "tags") List<Long> tags,
             @RequestParam(value = "file") MultipartFile file) {
-        designService.saveDesign(title, file);
+        designService.saveDesign(title, tags, file);
     }
 
     @GetMapping

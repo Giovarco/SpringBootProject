@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class DesignService {
@@ -16,8 +17,11 @@ public class DesignService {
     @Autowired
     DesignRepository designRepository;
 
-    public void saveDesign(String title, MultipartFile file) {
-        Design design = ParametersToDesignMapper.map(title, file);
+    @Autowired
+    ParametersToDesignMapper parametersToDesignMapper;
+
+    public void saveDesign(String title, List<Long> tags, MultipartFile file) {
+        Design design = parametersToDesignMapper.map(title, tags, file);
         designRepository.save(design);
     }
 
