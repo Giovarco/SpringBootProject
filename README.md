@@ -18,6 +18,7 @@
     - POSTs should return the created entity
     - UPDATEs should return the updated entity
     - The update end-point should avoid mapping if possible
+    - All fields must be private, if that makes sense for them
 
 ## Features
 - Each design can have 0 or more tags
