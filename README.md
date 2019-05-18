@@ -2,6 +2,7 @@
 ## Code related
 - Model
     - Add more constrains like "nullable = false"
+    - Choose a proper fetch type
 - DTO
     - Could we use entities instead of DTO?
         - If we use DTOs, we must change test classes accordingly
@@ -21,3 +22,5 @@
 - Each design can have 0 or more tags
 - Each design has a description
 - Design results can be filtered
+- Add DELETE end-points
+    - Choose a proper cascade type
