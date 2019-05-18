@@ -3,6 +3,7 @@
 - Model
     - Add more constrains like "nullable = false"
     - Choose a proper fetch type
+    - Overriden toString must take into account null values?
 - DTO
     - Could we use entities instead of DTO?
         - If we use DTOs, we must change test classes accordingly
