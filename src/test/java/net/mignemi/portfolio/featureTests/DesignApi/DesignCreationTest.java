@@ -1,7 +1,10 @@
 package net.mignemi.portfolio.featureTests.DesignApi;
 
 import net.mignemi.portfolio.model.Design;
+import net.mignemi.portfolio.model.Tag;
 import net.mignemi.portfolio.repository.DesignRepository;
+import net.mignemi.portfolio.repository.TagRepository;
+import net.mignemi.portfolio.utils.RepositoryUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,8 +43,17 @@ public class DesignCreationTest {
     @Autowired
     private DesignRepository designRepository;
 
+    @Autowired
+    private TagRepository tagRepository;
+
+    @Autowired
+    private RepositoryUtils repositoryUtils;
+
     @Before
     public void setup() throws IOException {
+        tagRepository.save(Tag.builder()
+                .title("tagTitle")
+                .build());
         InputStream inputStream = new ClassPathResource("testImage.jpg").getInputStream();
         image = new MockMultipartFile("file", inputStream);
     }
@@ -54,6 +66,7 @@ public class DesignCreationTest {
                         .file(image)
                         .contentType(MediaType.MULTIPART_FORM_DATA)
                         .param(TITLE, TITLE)
+                        .param("tags", repositoryUtils.findUniqueTag().getId().toString())
         )
                 .andExpect(status().isCreated());
 
@@ -61,9 +74,16 @@ public class DesignCreationTest {
         List<Design> designs = designRepository.findAll();
         assertEquals(1, designs.size());
 
-        // Assert entity content
+        // Assert design entity content
         Design design = designs.get(0);
         assertEquals(TITLE, design.getTitle());
         assertNotNull(design.getImage());
+
+        // Assert tag entity content
+        List<Tag> tags = design.getTags();
+        assertEquals(1, tags.size());
+
+        Tag tag = tags.get(0);
+        assertEquals(repositoryUtils.findUniqueTag().getId(), tag.getId());
     }
 }
