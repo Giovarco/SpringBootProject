@@ -6,8 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table
@@ -34,4 +36,16 @@ public class Design {
     @Lob
     @Column(columnDefinition = "BLOB")
     private byte[] image;
+
+    @Override
+    public String toString() {
+        return "Design{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", tags=" + tags.stream()
+                                .map(tag -> tag.getId().toString())
+                                .collect(Collectors.joining(", ","[","]")) +
+                ", image=" + Arrays.toString(image) +
+                '}';
+    }
 }

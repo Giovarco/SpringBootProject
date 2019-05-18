@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table
@@ -26,4 +27,14 @@ public class Tag {
     @ManyToMany(mappedBy = "tags")
     private List<Design> designs;
 
+    @Override
+    public String toString() {
+        return "Tag{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", designs=" + designs.stream()
+                .map(design -> design.getId().toString())
+                .collect(Collectors.joining(", ", "[", "]")) +
+                '}';
+    }
 }
