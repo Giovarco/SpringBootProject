@@ -2,7 +2,9 @@ package net.mignemi.portfolio.featureTests.DesignApi;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import net.mignemi.portfolio.dto.DesignDto;
 import net.mignemi.portfolio.model.Design;
+import net.mignemi.portfolio.model.Tag;
 import net.mignemi.portfolio.repository.DesignRepository;
 import net.mignemi.portfolio.utils.RepositoryUtils;
 import org.junit.Before;
@@ -15,6 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -46,10 +49,17 @@ public class DesignRetrievalTest {
     @Before
     public void setup() {
         byte[] byteArray = {1};
+
+        List<Tag> tagList = new ArrayList<>();
+        Tag tag = Tag.builder().title("tagTitle").build();
+        tagList.add(tag);
+
         Design designToSave = Design.builder()
-                .title("title")
+                .title("designTitle")
+                .tags(tagList)
                 .image(byteArray)
                 .build();
+
         designRepository.save(designToSave);
         savedDesign = repositoryUtils.findUniqueDesign();
     }
@@ -64,15 +74,16 @@ public class DesignRetrievalTest {
                 .getContentAsString();
 
         // Process response
-        List<Design> designs = objectMapper.readValue(responseBody, new TypeReference<List<Design>>() {
+        List<DesignDto> designs = objectMapper.readValue(responseBody, new TypeReference<List<DesignDto>>() {
         });
 
         // Assert entity existance
         assertEquals(1, designs.size());
 
         // Assert entity content
-        Design retrievedDesign = designs.get(0);
+        DesignDto retrievedDesign = designs.get(0);
         assertEquals(savedDesign.getTitle(), retrievedDesign.getTitle());
         assertTrue(Arrays.equals(savedDesign.getImage(), retrievedDesign.getImage()));
+        assertEquals(designs.get(0).getTags().get(0), repositoryUtils.findUniqueTag().getId());
     }
 }
