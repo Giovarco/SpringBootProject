@@ -19,7 +19,8 @@
     - UPDATEs should return the updated entity
     - The update end-point should avoid mapping if possible
     - All fields must be private, if that makes sense for them
-
+- Test coverage
+    - Unit test mappers and converts
 ## Features
 - Each design can have 0 or more tags
 - Each design has a description
