@@ -19,6 +19,7 @@
     - UPDATEs should return the updated entity
     - The update end-point should avoid mapping if possible
     - All fields must be private, if that makes sense for them
+    - Find a better way to avoid toString() stackoverflow because of circular reference in models
 - Test coverage
     - Unit test mappers and converts
 ## Features
