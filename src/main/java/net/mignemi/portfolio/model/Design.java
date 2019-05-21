@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
@@ -43,8 +42,8 @@ public class Design {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", tags=" + tags.stream()
-                                .map(tag -> tag.getId().toString())
-                                .collect(Collectors.joining(", ","[","]")) +
+                .map(tag -> tag.getId().toString())
+                .collect(Collectors.joining(", ", "[", "]")) +
                 ", image=" + Arrays.toString(image) +
                 '}';
     }

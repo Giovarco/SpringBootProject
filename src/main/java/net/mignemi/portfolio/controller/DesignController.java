@@ -1,6 +1,6 @@
 package net.mignemi.portfolio.controller;
 
-import net.mignemi.portfolio.model.Design;
+import net.mignemi.portfolio.dto.DesignDto;
 import net.mignemi.portfolio.service.DesignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/design")
@@ -27,7 +26,7 @@ public class DesignController {
     }
 
     @GetMapping
-    public List<Design> getDesigns() {
+    public List<DesignDto> getDesigns() {
         return designService.getDesigns();
     }
 
