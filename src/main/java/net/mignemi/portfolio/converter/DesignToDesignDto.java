@@ -13,10 +13,6 @@ import java.util.stream.Collectors;
 public class DesignToDesignDto
         implements Converter<Design, DesignDto> {
 
-    @Autowired
-    TagRepository tagRepository;
-
-
     @Override
     public DesignDto convert(Design design) {
         return DesignDto.builder()
