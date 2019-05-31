@@ -1,5 +1,6 @@
 package net.mignemi.portfolio.service;
 
+import net.mignemi.portfolio.converter.TagDtoToTagConverter;
 import net.mignemi.portfolio.converter.TagToTagDtoConverter;
 import net.mignemi.portfolio.dto.TagDto;
 import net.mignemi.portfolio.model.Tag;
@@ -19,7 +20,11 @@ public class TagService {
     @Autowired
     TagToTagDtoConverter tagToTagDtoConverter;
 
-    public void saveTag(Tag tag) {
+    @Autowired
+    TagDtoToTagConverter tagDtoToTagConverter;
+
+    public void saveTag(TagDto tagDto) {
+        Tag tag = tagDtoToTagConverter.convert(tagDto);
         tagRepository.save(tag);
     }
 

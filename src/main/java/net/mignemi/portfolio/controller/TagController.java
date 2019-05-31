@@ -18,8 +18,8 @@ public class TagController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void saveTag(@RequestBody Tag tag) {
-        tagService.saveTag(tag);
+    public void saveTag(@RequestBody TagDto tagDto) {
+        tagService.saveTag(tagDto);
     }
 
     @GetMapping

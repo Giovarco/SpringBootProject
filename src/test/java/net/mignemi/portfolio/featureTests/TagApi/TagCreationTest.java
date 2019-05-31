@@ -2,8 +2,12 @@ package net.mignemi.portfolio.featureTests.TagApi;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import net.mignemi.portfolio.dto.TagDto;
+import net.mignemi.portfolio.model.Design;
 import net.mignemi.portfolio.model.Tag;
+import net.mignemi.portfolio.repository.DesignRepository;
 import net.mignemi.portfolio.repository.TagRepository;
+import net.mignemi.portfolio.utils.RepositoryUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,6 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -38,10 +43,23 @@ public class TagCreationTest {
     @Autowired
     private TagRepository tagRepository;
 
+    @Autowired
+    private DesignRepository designRepository;
+
+    @Autowired
+    private RepositoryUtils repositoryUtils;
+
     @Before
     public void setup() throws JsonProcessingException {
-        Tag tag = Tag.builder()
+        Design design = Design.builder().build();
+        designRepository.save(design);
+
+        List<Long> designIds = new ArrayList<>();
+        designIds.add(repositoryUtils.findUniqueDesign().getId());
+
+        TagDto tag = TagDto.builder()
                 .title(TAG_TITLE)
+                .designIds(designIds)
                 .build();
         request = objectMapper.writeValueAsString(tag);
     }
@@ -61,6 +79,10 @@ public class TagCreationTest {
         // Assert entity content
         Tag tag = tags.get(0);
         assertEquals(TAG_TITLE, tag.getTitle());
+
+        List<Design> tagDesigns = tag.getDesigns();
+        assertEquals(1, tagDesigns.size());
+        assertEquals(repositoryUtils.findUniqueDesign().getId(), tagDesigns.get(0).getId());
     }
 
 }
