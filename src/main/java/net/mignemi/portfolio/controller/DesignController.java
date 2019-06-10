@@ -34,8 +34,9 @@ public class DesignController {
     public void updateDesign(
             @PathVariable("id") Long id,
             @RequestParam(value = "title") String title,
-            @RequestParam(value = "file") MultipartFile file) {
-        designService.updateDesign(id, title, file);
+            @RequestParam(value = "file") MultipartFile file,
+            @RequestParam(value = "tags") List<Long> tagIds) {
+        designService.updateDesign(id, title, file, tagIds);
     }
 
 }
