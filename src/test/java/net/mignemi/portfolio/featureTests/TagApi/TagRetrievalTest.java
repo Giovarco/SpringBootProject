@@ -2,7 +2,10 @@ package net.mignemi.portfolio.featureTests.TagApi;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import net.mignemi.portfolio.dto.TagDto;
+import net.mignemi.portfolio.model.Design;
 import net.mignemi.portfolio.model.Tag;
+import net.mignemi.portfolio.repository.DesignRepository;
 import net.mignemi.portfolio.repository.TagRepository;
 import net.mignemi.portfolio.utils.RepositoryUtils;
 import org.junit.Before;
@@ -15,6 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -43,12 +47,24 @@ public class TagRetrievalTest {
     @Autowired
     private RepositoryUtils repositoryUtils;
 
+    @Autowired
+    private DesignRepository designRepository;
+
     @Before
     public void setup() {
+        Design design = Design.builder()
+                .tags(new ArrayList<>())
+                .build();
+
+        List<Design> tagDesigns = new ArrayList<>();
+        tagDesigns.add(design);
         Tag tagToSave = Tag.builder()
                 .title(TITLE)
+                .designs(tagDesigns)
                 .build();
+        design.getTags().add(tagToSave);
         tagRepository.save(tagToSave);
+        designRepository.save(design);
         savedTag = repositoryUtils.findUniqueTag();
     }
 
@@ -62,14 +78,20 @@ public class TagRetrievalTest {
                 .getContentAsString();
 
         // Process response
-        List<Tag> responseTags = objectMapper.readValue(responseBody, new TypeReference<List<Tag>>() {
+        List<TagDto> responseTags = objectMapper.readValue(responseBody, new TypeReference<List<TagDto>>() {
         });
 
         // Assert response tag existance
         assertEquals(1, responseTags.size());
 
         // Assert response tag content
-        Tag responseTag = responseTags.get(0);
+        TagDto responseTag = responseTags.get(0);
         assertEquals(savedTag.getTitle(), responseTag.getTitle());
+
+        // Assert response tag design ids
+        List<Long> designIds = responseTag.getDesignIds();
+        assertEquals(1, designIds.size());
+
+        assertEquals(repositoryUtils.findUniqueDesign().getId(), designIds.get(0));
     }
 }
