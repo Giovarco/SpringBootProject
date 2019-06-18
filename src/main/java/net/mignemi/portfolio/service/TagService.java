@@ -4,6 +4,7 @@ import net.mignemi.portfolio.converter.TagDtoToTagConverter;
 import net.mignemi.portfolio.converter.TagToTagDtoConverter;
 import net.mignemi.portfolio.dto.TagDto;
 import net.mignemi.portfolio.model.Tag;
+import net.mignemi.portfolio.repository.DesignRepository;
 import net.mignemi.portfolio.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,8 +24,14 @@ public class TagService {
     @Autowired
     TagDtoToTagConverter tagDtoToTagConverter;
 
+    @Autowired
+    DesignRepository designRepository;
+
     public void saveTag(TagDto tagDto) {
         Tag tag = tagDtoToTagConverter.convert(tagDto);
+        designRepository.findAllById(tagDto.getDesignIds()).forEach(design -> {
+            design.getTags().add(tag);
+        });
         tagRepository.save(tag);
     }
 
