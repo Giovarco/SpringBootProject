@@ -30,7 +30,10 @@ public class TagService {
     public void saveTag(TagDto tagDto) {
         Tag tag = tagDtoToTagConverter.convert(tagDto);
         designRepository.findAllById(tagDto.getDesignIds()).forEach(design -> {
-            design.getTags().add(tag);
+            List<Tag> designTags = design.getTags();
+            if(designTags != null) {
+                designTags.add(tag);
+            }
         });
         tagRepository.save(tag);
     }
