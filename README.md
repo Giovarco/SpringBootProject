@@ -28,3 +28,5 @@
 - Design results can be filtered
 - Add DELETE end-points
     - Choose a proper cascade type
+## Bugfix
+- Steps to reproduce: create a design with a tag; update the design to include a new tag; GET the tags --> The design is linked to both tags, but the tags a
