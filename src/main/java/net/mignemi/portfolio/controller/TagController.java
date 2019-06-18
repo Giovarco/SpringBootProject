@@ -1,7 +1,6 @@
 package net.mignemi.portfolio.controller;
 
 import net.mignemi.portfolio.dto.TagDto;
-import net.mignemi.portfolio.model.Tag;
 import net.mignemi.portfolio.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,7 +27,7 @@ public class TagController {
     }
 
     @PutMapping("/{id}")
-    public void putDesign(@PathVariable("id") Long id, @RequestBody Tag tag) {
+    public void putDesign(@PathVariable("id") Long id, @RequestBody TagDto tag) {
         tagService.updateTag(id, tag);
     }
 }
