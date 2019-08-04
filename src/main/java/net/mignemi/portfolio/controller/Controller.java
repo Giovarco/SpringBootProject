@@ -33,4 +33,13 @@ public class Controller {
     public void deleteFilm(@PathVariable("id") Long id) {
         filmRepository.deleteById(id);
     }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteFilm(@PathVariable("id") Long id, @RequestBody @Valid Film newFilm) {
+        Film filmInDatabase = filmRepository.getOne(id);
+        filmInDatabase.setTitle(newFilm.getTitle());
+        filmInDatabase.setLocations(newFilm.getLocations());
+        filmRepository.save(filmInDatabase);
+    }
 }
