@@ -1,14 +1,22 @@
 package net.mignemi.portfolio.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import net.mignemi.portfolio.model.Film;
+import net.mignemi.portfolio.repository.FilmRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping(value = "/film")
 public class Controller {
 
-    @RequestMapping("/test")
-    public String greeting() {
-        return "test";
+    @Autowired
+    FilmRepository filmRepository;
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public void saveFilm(@RequestBody Film film) {
+        filmRepository.save(film);
     }
 
 }
