@@ -7,8 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tbl_book")
-public class Book {
+@Table
+public class Film  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,10 +16,10 @@ public class Book {
     private String name;
     private Double price;
 
-    public Book() {
+    public Film() {
     }
 
-    public Book(String name, Double price) {
+    public Film(String name, Double price) {
         this.name = name;
         this.price = price;
     }
@@ -50,7 +50,7 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book{" +
+        return "Film{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price +
