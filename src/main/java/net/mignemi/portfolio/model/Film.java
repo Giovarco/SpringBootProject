@@ -1,7 +1,6 @@
 package net.mignemi.portfolio.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -9,6 +8,9 @@ import javax.persistence.*;
 @Table
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Film  {
 
     @Id
