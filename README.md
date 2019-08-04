@@ -4,6 +4,6 @@
 - ~~Get all books~~
 - Implement validators
 - ~~Delete existing book~~
-- Import books from CSV file
+- ~~Import books from CSV file~~
 - Put existing book
 - Implement logging
