@@ -27,4 +27,9 @@ public class Controller {
         return filmRepository.findAll();
     }
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteFilm(@PathVariable("id") Long id) {
+        filmRepository.deleteById(id);
+    }
 }
