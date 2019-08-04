@@ -2,7 +2,7 @@
 
 - ~~Save new book~~
 - ~~Get all books~~
-- Implement validators
+- ~~Implement validators~~
 - ~~Delete existing book~~
 - ~~Import books from CSV file~~
 - Put existing book
