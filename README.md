@@ -5,5 +5,6 @@
 - ~~Implement validators~~
 - ~~Delete existing book~~
 - ~~Import books from CSV file~~
-- Put existing book
+- ~~Put existing book~~
 - Implement logging
+- Update README with instructions
